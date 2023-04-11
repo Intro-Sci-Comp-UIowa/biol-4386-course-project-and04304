@@ -1,11 +1,11 @@
 ---
 title: "HW3"
 output:
+  pdf_document: default
   word_document: default
+  html_notebook: default
   html_document:
     df_print: paged
-  html_notebook: default
-  pdf_document: default
 ---
 
 # Introduction
@@ -27,10 +27,14 @@ Fig. 6. FR represses expression of differentiation genes by restoring function o
 To collect the data seen in Figure 6 B the authors grew 92.1 uveal melanoma cells in 100 nM FR or DMSO in RPMI growth medium. After 1 and 3 days of treatment RNA was collected from each treatment. HiSeq2500 was used to generate FastQ raw data. This data was aligned to the whole genome using Bioconductor in EdgeR. Once aligned, a 2.0 fold change in expression was considered significant comparing FR treated to non-FR treated cells. This data was then plotted as an MA plot, M = log ratio and A = mean average.
 
 Since I have a CSV file containing the log ratio and mean averages, I'll make the volcano plot using Rstudio. 
-The next step I need to take now that I've generated the MA plot is to trim some of the data. I've set the perimeters to only graph fold change >2.0 but I need to filter out results with a significance less than 10%. The authors set their '*q*'<0.01 meaning only genes with a false discovery rate (FDR) greater than 10% are graphed. I however, do not have the statistical analysis available to me. Instead I'll have to derive significance from the change between days.  
+The next step I need to take now that I've generated the MA plot is to trim some of the data. I've set the perimeters to only graph fold change >2.0 but I need to filter out results with a significance less than 10%. The authors set their '*q*'<0.01 meaning only genes with a false discovery rate (FDR) greater than 10% are graphed. I however, do not have the statistical analysis available to me. Instead I'll have to derive significance from the change between days.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 ```{r message=FALSE, warning=FALSE}
 #Install needed packages 
 options(repos = c(CRAN = "https://cran.r-project.org"))
+tinytex::install_tinytex(force = TRUE)
 install.packages('R.utils')
 library(data.table)
 install.packages("tidyverse")
@@ -38,10 +42,10 @@ library(tidyverse)
 ```
 ```{r}
 #Import data files 
-GSM2781365_sample.92.1_d1_1.txt <- fread("Data/GSM2781365_sample.92.1_d1_1.txt.gz")
-GSM2781367_sample.92.1_d3_1.txt <- fread("Data/GSM2781367_sample.92.1_d3_1.txt.gz")
-GSM2781369_sample.92.1_fr1_1.txt <- fread("Data/GSM2781369_sample.92.1_fr1_1.txt.gz")
-GSM2781371_sample.92.1_fr3_1.txt <- fread("Data/GSM2781371_sample.92.1_fr3_1.txt.gz")
+GSM2781365_sample.92.1_d1_1.txt <- fread("data/sample.92.1_d1.gz")
+GSM2781367_sample.92.1_d3_1.txt <- fread("data/sample.92.1_d3_1.gz")
+GSM2781369_sample.92.1_fr1_1.txt <- fread("data/sample.92.1_fr1_1.gz")
+GSM2781371_sample.92.1_fr3_1.txt <- fread("data/sample.92.1_fr3_1.gz")
 ```
 ```{r}
 #Renames files 
