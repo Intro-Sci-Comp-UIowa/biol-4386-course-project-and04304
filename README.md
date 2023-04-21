@@ -213,4 +213,4 @@ ggplot(MAdata_filtered, aes(x = aveExpr, y = logFC, color = Day)) +
 
     ## Warning: Removed 197 rows containing missing values (`geom_point()`).
 
-![](README_files/figure-markdown/unnamed-chunk-5-1.png)
+![](unnamed-chunk-5-1.png)
