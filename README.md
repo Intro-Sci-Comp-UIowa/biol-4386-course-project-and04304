@@ -143,53 +143,13 @@ data <- data.frame("D1_Expression" = d1$"sample.92.1_d1_1",
 ``` r
 # Calculate the mean expression level (M) and the log fold change (A) for each gene
 logFC_D1 <- log2(data$D1_FR_Expression / data$D1_Expression)
-```
-
-    ## Warning: NaNs produced
-
-``` r
 aveExpr_D1 <- log2(rowMeans(data[,c("D1_FR_Expression","D1_Expression")], na.rm = TRUE))
-```
-
-    ## Warning: NaNs produced
-
-``` r
 logFC_D3 <- log2(data$D3_FR_Expression / data$D3_Expression)
-```
-
-    ## Warning: NaNs produced
-
-``` r
 aveExpr_D3 <- log2(rowMeans(data[,c("D3_FR_Expression","D3_Expression")], na.rm = TRUE))
-```
-
-    ## Warning: NaNs produced
-
-``` r
 logFC_D1_2 <- log2(data$D1_FR_Expression / data$D1_Expression)
-```
-
-    ## Warning: NaNs produced
-
-``` r
 aveExpr_D1_2 <- log2(rowMeans(data[,c("D1_FR_Expression_2","D1_Expression_2")], na.rm = TRUE))
-```
-
-    ## Warning: NaNs produced
-
-``` r
 logFC_D3_2 <- log2(data$D3_FR_Expression / data$D3_Expression)
-```
-
-    ## Warning: NaNs produced
-
-``` r
 aveExpr_D3_2 <- log2(rowMeans(data[,c("D3_FR_Expression_2","D3_Expression_2")], na.rm = TRUE))
-```
-
-    ## Warning: NaNs produced
-
-``` r
 # Combine the M and A values with the Day column in a data frame
 MA_data <- data.frame(Day = rep(c("D1", "D3"), each = length(logFC_D1)),
                       logFC = c(logFC_D1, logFC_D3, logFC_D1_2, logFC_D3_2 ),
@@ -210,7 +170,5 @@ ggplot(MAdata_filtered, aes(x = aveExpr, y = logFC, color = Day)) +
   xlim(-1, 5) +
   ylim(-5, 5)
 ```
-
-    ## Warning: Removed 197 rows containing missing values (`geom_point()`).
 
 ![](unnamed-chunk-5-1.png)
