@@ -19,13 +19,7 @@ In this report I plan to reproduce the MA plot in Fig.6 B from Onken et
 al. 2018 with RNA expression data published with the paper. This figure
 depicts the fold change vs. average log expression of RNA between FR and
 non FR treated cells. Identification of gene clusters suppressed by FR,
-or not, helps us determine whether FR will be a useful treatment in UM.
-Once I've recreated the MA plot depicted below I plan on using my own
-RNAseq data collected from cells treated with a B-Raf inhibitor. B-Raf
-is a proto-oncogenic serine/threonine kinase that is commonly expressed
-in FR resistant cells. Expression profiles of FR treated cells, and
-B-Raf inhibitor treated cells, allows us to compare their individual
-efficacy while also illuminating a potential multidrug treatment.
+or not, helps us determine FR's downstream effects.
 
 # Reference
 
@@ -34,7 +28,7 @@ exchange to inhibit constitutively active G protein α subunits in cancer
 cells. Science Signaling. 2018;11(546):eaao6852.
 <doi:10.1126/scisignal.aao6852>
 
-![MA Plot](Onken2018_MAplot.jpeg)
+![MA Plot](images/Onken2018_MAplot.jpeg)
 
 Fig. 6. FR represses expression of differentiation genes by restoring
 function of the PRC2. (A)Gaq-mutant 92.1 UM cells were treated with FR
@@ -80,11 +74,47 @@ in EdgeR. Once aligned, a 2.0 fold change in expression was considered
 significant comparing FR treated to non-FR treated cells. This data was
 then plotted as an MA plot, M = log ratio and A = mean average.
 
-Since I have a CSV file containing the log ratio and mean averages, I'll
-make the volcano plot using Rstudio. Once that is completed I will work
-my way back through the pipeline described in their methods section.
-I'll start with aligning my own data set using Bioconductor, then I'll
-use SAM (significance analysis of microarrays) to rank gene expression.
+I used the expression data from the CSV files published by the authors
+to calculate the average mean expression and the log2 fold change. The
+data was combined into a single data table and filtered following the
+authors example; fold change \<2 and average expression \<0.1 were
+discarded. These values were then plotted using ggplot.
+
+# Results and Discussion
+
+The results generated in the figure indicate that treatment with FR
+reduces RNA expression in some genes after 72 hours of treatment. There
+is a cluster of genes seen in the bottom left corner that seem to be
+down regulated via GNAQ/11 nucleotide exchange inhibition.\
+For my own research this project was valuable to confirm some data we
+had already seen in our SB mutagenesis assays. This assay identified
+several drug resistance drivers, or hot spots for oncogenesis. These
+drivers are not seen in the genes that are down regulated by FR which
+indicates they can still play a role in drug resistance.
+
+Comparing the figure I generated to the original figure there is a
+difference in maximum values. I used the same log transformations and
+data trimming as the authors but I failed to see expression values as
+high as the authors. It seems almost as if the authors had more data
+points on the original image. This is rather unlikely because I
+downloaded each replicate mentioned in their materials and methods. The
+discrepancy may be due to the fact that I filtered out average
+expressions less than 10% from the data given in the CSV files rather
+than using statistical analysis on the actual reads.
+
+# Conclusion
+
+In the future I think it will be easier to generate an MA plot from my
+own data. Downloading the CSV files from the Gene Expression Omnibus was
+easy but I found it difficult to determine what the values given in the
+CSV file actually were. It would be nice if the authors provided a
+secondary file or added formatting information to the website blurb.
+Overall I give the authors an A on reproducibility. They provided
+extensive documentation in the articles material and methods section,
+used widely available open source software for their analysis, and
+participated in open data sharing via the Gene expression Omnibus. The
+steps the authors took to insure reproducibility made it far easier for
+a beginner like me to recreate these meaningful results.
 
 Here is a link to the [Project Github
 page](https://github.com/Intro-Sci-Comp-UIowa/biol-4386-course-project-and04304.git)
@@ -171,4 +201,4 @@ ggplot(MAdata_filtered, aes(x = aveExpr, y = logFC, color = Day)) +
   ylim(-5, 5)
 ```
 
-![](unnamed-chunk-5-1.png)
+![](images/unnamed-chunk-5-1.png)
