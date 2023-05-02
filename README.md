@@ -82,6 +82,8 @@ discarded. These values were then plotted using ggplot.
 
 # Results and Discussion
 
+![MA Plot](unnamed-chunk-5-1.png)
+
 The results generated in the figure indicate that treatment with FR
 reduces RNA expression in some genes after 72 hours of treatment. There
 is a cluster of genes seen in the bottom left corner that seem to be
@@ -115,6 +117,19 @@ used widely available open source software for their analysis, and
 participated in open data sharing via the Gene expression Omnibus. The
 steps the authors took to insure reproducibility made it far easier for
 a beginner like me to recreate these meaningful results.
+
+# Reflection
+
+I learned pretty quickly in this project that it's easier to not
+reinvent the wheel. I feel like I picked up at a weird starting point,
+as single value gene expression in a CSV, whereas a lot of tutorials I
+found online are explaining the entire differential gene expression
+pipeline. I look forward to being able to start at square one with the
+RNA seq data we generated last month with all of the resources I now
+know about, thanks to this project. Another thing I took away from this
+project is directory management. I have a lot of images and replicates
+of images in my day to day work and I think I'd be completely lost
+without a solid foundation in directory structure.
 
 Here is a link to the [Project Github
 page](https://github.com/Intro-Sci-Comp-UIowa/biol-4386-course-project-and04304.git)
@@ -201,5 +216,4 @@ ggplot(MAdata_filtered, aes(x = aveExpr, y = logFC, color = Day)) +
   ylim(-5, 5)
 ```
 
-![](README_files/figure-markdown/unnamed-chunk-5-1.png) ![MA
-Plot](unnamed-chunk-5-1.png)
+![](README_files/figure-markdown/unnamed-chunk-5-1.png)
