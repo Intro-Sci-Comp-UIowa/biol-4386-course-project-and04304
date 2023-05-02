@@ -201,4 +201,5 @@ ggplot(MAdata_filtered, aes(x = aveExpr, y = logFC, color = Day)) +
   ylim(-5, 5)
 ```
 
-![](README_files/figure-markdown/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown/unnamed-chunk-5-1.png) ![MA
+Plot](unnamed-chunk-5-1.png)
